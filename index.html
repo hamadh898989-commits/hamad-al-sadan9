@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>بنك أسئلة الكيمياء - المخاليط والعناصر والمركبات</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        :root {
+            --primary-blue: #1a2a6c;
+            --secondary-blue: #2a4d8e;
+            --light-blue: #3a70b0;
+            --accent-gold: #ffcc00;
+            --accent-orange: #ff9900;
+            --success-green: #34a853;
+            --error-red: #ea4335;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue), var(--light-blue));
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            padding: 10px;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        
+        /* شاشة البداية */
+        #start-screen {
+            text-align: center;
+            padding: 20px 10px;
+            animation: fadeIn 1s ease-in;
+            width: 100%;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .header {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--accent-gold);
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+            line-height: 1.3;
+        }
+        
+        h2 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #a8d0ff;
+            line-height: 1.4;
+        }
+        
+        .lab-equipment {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        .equipment {
+            font-size: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        .info-card {
+            background: white;
+            color: #333;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 2px solid var(--primary-blue);
+            animation: slideUp 1s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .student-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            text-align: right;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--primary-blue);
+            font-size: 1rem;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--primary-blue);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 8px rgba(255, 153, 0, 0.3);
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1.1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(26, 42, 108, 0.4);
+            width: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(26, 42, 108, 0.6);
+        }
+        
+        .test-details {
+            background: #000;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            border-left: 4px solid var(--accent-gold);
+        }
+        
+        /* قسم الألغاز */
+        .puzzles-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            animation: slideUp 1s ease-out 0.3s both;
+        }
+        
+        .puzzles-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--accent-gold);
+            text-align: center;
+        }
+        
+        .puzzles-subtitle {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            text-align: center;
+            color: #a8d0ff;
+        }
+        
+        .puzzles-btn {
+            background: linear-gradient(135deg, var(--accent-orange), #ff6600);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1.1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            margin: 0 auto;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(255, 102, 0, 0.4);
+            width: 100%;
+        }
+        
+        /* شاشة الألغاز */
+        #puzzles-screen {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .puzzles-header {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+        
+        .puzzles-counter {
+            font-size: 1.1rem;
+        }
+        
+        .puzzle-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .puzzle-text {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            text-align: center;
+        }
+        
+        .puzzle-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .puzzle-option {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            font-size: 1rem;
+        }
+        
+        .puzzle-option.selected {
+            background: rgba(26, 115, 232, 0.3);
+            border: 2px solid #1a73e8;
+        }
+        
+        .puzzle-option.correct {
+            background: rgba(52, 168, 83, 0.3);
+            border: 2px solid #34a853;
+        }
+        
+        .puzzle-option.incorrect {
+            background: rgba(234, 67, 53, 0.3);
+            border: 2px solid #ea4335;
+        }
+        
+        .puzzle-feedback {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .puzzle-feedback.correct {
+            background: rgba(52, 168, 83, 0.2);
+            border: 1px solid #34a853;
+            display: block;
+        }
+        
+        .puzzle-feedback.incorrect {
+            background: rgba(234, 67, 53, 0.2);
+            border: 1px solid #ea4335;
+            display: block;
+        }
+        
+        .puzzle-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        
+        /* شاشة الأسئلة */
+        #quiz-screen {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .quiz-header {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+        
+        .student-info {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--accent-gold);
+        }
+        
+        .timer {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-gold);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 8px 15px;
+            border-radius: 8px;
+            border: 2px solid var(--accent-gold);
+        }
+        
+        .question-counter {
+            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 8px;
+        }
+        
+        .question-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .question-text {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            text-align: center;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .option {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            font-size: 1rem;
+        }
+        
+        .option.selected {
+            background: rgba(26, 115, 232, 0.3);
+            border: 2px solid #1a73e8;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            font-weight: bold;
+            flex: 1;
+        }
+        
+        .nav-btn:disabled {
+            background: #555;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        /* شاشة النتائج */
+        #results-screen {
+            display: none;
+            animation: fadeIn 1s ease-in;
+        }
+        
+        .results-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        
+        .celebration {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            animation: bounce 1s infinite alternate;
+        }
+        
+        @keyframes bounce {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+        
+        .score {
+            font-size: 2.5rem;
+            margin: 20px 0;
+            color: var(--accent-gold);
+            text-shadow: 0 0 15px rgba(255, 204, 0, 0.5);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .score-details {
+            font-size: 1.3rem;
+            margin: 10px 0;
+            color: #a8d0ff;
+        }
+        
+        .feedback-message {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        /* قسم التغذية الراجعة النهائية */
+        .final-feedback {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .feedback-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--accent-gold);
+            text-align: center;
+            border-bottom: 2px solid var(--accent-gold);
+            padding-bottom: 10px;
+        }
+        
+        .questions-review {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+        
+        .question-review {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            border-left: 4px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .question-review.correct {
+            border-left-color: var(--success-green);
+        }
+        
+        .question-review.incorrect {
+            border-left-color: var(--error-red);
+        }
+        
+        .review-question {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        
+        .review-answer {
+            font-size: 1rem;
+            margin-bottom: 6px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .review-correct {
+            color: var(--success-green);
+            font-weight: bold;
+        }
+        
+        .review-explanation {
+            font-size: 0.9rem;
+            color: #a8d0ff;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 6px;
+            border-right: 3px solid var(--accent-gold);
+        }
+        
+        /* شروحات */
+        .lessons-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .lessons-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--accent-gold);
+            text-align: center;
+        }
+        
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .lesson-card {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            border-radius: 12px;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            text-align: center;
+        }
+        
+        .lesson-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #a8d0ff;
+        }
+        
+        .lesson-description {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .lesson-link {
+            display: inline-block;
+            background: var(--primary-blue);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .team-section {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .team-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #a8d0ff;
+        }
+        
+        .team-members {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .member {
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            padding: 12px;
+            border-radius: 10px;
+            width: 45%;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        /* تصميم متجاوب */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 700px;
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .question-text, .puzzle-text {
+                font-size: 1.4rem;
+            }
+            
+            .quiz-header, .puzzles-header {
+                flex-direction: row;
+                text-align: right;
+            }
+            
+            .team-members {
+                flex-direction: row;
+            }
+            
+            .member {
+                width: auto;
+                min-width: 150px;
+            }
+            
+            .lessons-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .btn, .puzzles-btn {
+                width: auto;
+                padding: 15px 30px;
+            }
+            
+            .nav-btn {
+                flex: none;
+                padding: 15px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- شاشة البداية -->
+        <div id="start-screen">
+            <div class="header">
+                <h1><i class="fas fa-flask"></i> بنك أسئلة الكيمياء</h1>
+                <h2>المخاليط والعناصر والمركبات</h2>
+                
+                <div class="lab-equipment">
+                    <div class="equipment">🧪</div>
+                    <div class="equipment">🔬</div>
+                    <div class="equipment">⚗️</div>
+                    <div class="equipment">🌡️</div>
+                    <div class="equipment">💧</div>
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <form class="student-form" id="student-form">
+                    <div class="form-group">
+                        <label for="student-name"><i class="fas fa-user"></i> اسم الطالب</label>
+                        <input type="text" id="student-name" required placeholder="أدخل اسمك الكامل">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="student-section"><i class="fas fa-users"></i> الشعبة</label>
+                        <select id="student-section" required>
+                            <option value="">اختر الشعبة</option>
+                            <option value="1">الشعبة 1</option>
+                            <option value="2">الشعبة 2</option>
+                            <option value="3">الشعبة 3</option>
+                            <option value="4">الشعبة 4</option>
+                            <option value="5">الشعبة 5</option>
+                            <option value="6">الشعبة 6</option>
+                            <option value="7">الشعبة 7</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn">
+                        <i class="fas fa-play"></i> ابدأ الاختبار
+                    </button>
+                </form>
+                
+                <div class="test-details">
+                    <p><i class="fas fa-info-circle"></i> تفاصيل الاختبار:</p>
+                    <p><i class="fas fa-clock"></i> المدة: 40 دقيقة | <i class="fas fa-question-circle"></i> عدد الأسئلة: 50 سؤال</p>
+                    <p><i class="fas fa-exclamation-triangle"></i> لا يمكن تخطي السؤال بدون إجابة</p>
+                </div>
+            </div>
+            
+            <!-- قسم الألغاز -->
+            <div class="puzzles-section">
+                <h3 class="puzzles-title"><i class="fas fa-puzzle-piece"></i> ألغاز كيميائية</h3>
+                <p class="puzzles-subtitle">اختبر معلوماتك الكيميائية بطريقة ممتعة!</p>
+                <button class="puzzles-btn" id="puzzles-btn">
+                    <i class="fas fa-gamepad"></i> ابدأ حل الألغاز
+                </button>
+            </div>
+        </div>
+        
+        <!-- شاشة الألغاز -->
+        <div id="puzzles-screen">
+            <div class="puzzles-header">
+                <button class="nav-btn" id="puzzles-back-btn">العودة للرئيسية</button>
+                <div class="puzzles-counter" id="puzzles-counter">اللغز 1 من 10</div>
+            </div>
+            
+            <div class="puzzle-card">
+                <div class="puzzle-text" id="puzzle-text"></div>
+                
+                <div class="puzzle-options" id="puzzle-options"></div>
+                
+                <div class="puzzle-feedback" id="puzzle-feedback"></div>
+            </div>
+            
+            <div class="puzzle-navigation">
+                <button class="nav-btn" id="puzzle-prev-btn" disabled>
+                    <i class="fas fa-arrow-right"></i> السابق
+                </button>
+                <button class="nav-btn" id="puzzle-next-btn">
+                    التالي <i class="fas fa-arrow-left"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- شاشة الأسئلة -->
+        <div id="quiz-screen">
+            <div class="quiz-header">
+                <div class="student-info" id="student-info"></div>
+                <div class="timer" id="timer">40:00</div>
+                <div class="question-counter" id="question-counter">السؤال 1 من 50</div>
+            </div>
+            
+            <div class="question-card">
+                <div class="question-text" id="question-text"></div>
+                
+                <div class="options" id="options"></div>
+            </div>
+            
+            <div class="navigation">
+                <button class="nav-btn" id="prev-btn" disabled>
+                    <i class="fas fa-arrow-right"></i> السابق
+                </button>
+                <button class="nav-btn" id="next-btn">
+                    التالي <i class="fas fa-arrow-left"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- شاشة النتائج -->
+        <div id="results-screen">
+            <div class="results-card">
+                <div class="celebration" id="celebration">🎉</div>
+                <h1>أحسنت!</h1>
+                <div class="score" id="final-score"></div>
+                <div class="score-details" id="score-details"></div>
+                <div class="feedback-message" id="feedback-message"></div>
+                <button class="btn" id="restart-btn">
+                    <i class="fas fa-redo"></i> إعادة الاختبار
+                </button>
+            </div>
+            
+            <!-- التغذية الراجعة النهائية -->
+            <div class="final-feedback">
+                <h3 class="feedback-title"><i class="fas fa-chart-bar"></i> التغذية الراجعة</h3>
+                <div class="questions-review" id="questions-review"></div>
+            </div>
+            
+            <!-- الشروحات -->
+            <div class="lessons-section">
+                <h3 class="lessons-title"><i class="fas fa-graduation-cap"></i> شروحات تعليمية</h3>
+                <div class="lessons-grid">
+                    <div class="lesson-card">
+                        <h4 class="lesson-title">درس المخاليط</h4>
+                        <p class="lesson-description">تعرف على أنواع المخاليط وطرق فصلها مع شرح مفصل بالأمثلة العملية.</p>
+                        <a href="https://youtu.be/zt5gXjXPNS0?si=W6ua7oMROWwRp8vy" target="_blank" class="lesson-link">
+                            <i class="fas fa-play-circle"></i> شاهد الشرح الآن
+                        </a>
+                    </div>
+                    
+                    <div class="lesson-card">
+                        <h4 class="lesson-title">درس العناصر والمركبات</h4>
+                        <p class="lesson-description">افهم الفرق بين العناصر والمركبات وتعلم كيفية تمييزها في الطبيعة.</p>
+                        <a href="https://youtu.be/egm1P7UGLbA?si=CEgiNDNFCLI6IoMu" target="_blank" class="lesson-link">
+                            <i class="fas fa-play-circle"></i> شاهد الشرح الآن
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-section">
+                <h3 class="team-title"><i class="fas fa-users"></i> فريق العمل</h3>
+                <div class="team-members">
+                    <div class="member">حمد السعدان</div>
+                    <div class="member">سهيل القرني</div>
+                    <div class="member">حسين غداف</div>
+                    <div class="member">محمد السالم</div>
+                    <div class="member">عبدالملك السنيد</div>
+                    <div class="member">تركي الفروان</div>
+                    <div class="member">فهد الزهراني</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // بيانات الأسئلة الكاملة (50 سؤال) من الملف المرفق
+        const questions = [
+            {
+                question: "العنصر هو مادة:",
+                options: ["تتكون من نوع واحد من الذرات", "تتكون من أكثر من نوع من الذرات", "لا تحتوي على أي ذرات"],
+                correctAnswer: 0,
+                explanation: "لأن العنصر لا يمكن تجزئته كيميائيًا، ويتكوّن من نوع واحد فقط من الذرات مثل الأوكسجين أو الحديد"
+            },
+            {
+                question: "المركب هو مادة:",
+                options: ["لا يمكن تحليلها", "تتكون من اتحاد عنصرين أو أكثر", "تتكون من نوع واحد من الذرات"],
+                correctAnswer: 1,
+                explanation: "لأن المركب ينتج من اتحاد عنصرين أو أكثر بنسبة ثابتة، مثل الماء (H₂O)"
+            },
+            {
+                question: "المحلول هو:",
+                options: ["خليط متجانس من مادتين أو أكثر", "مادة نقية", "عنصر كيميائي"],
+                correctAnswer: 0,
+                explanation: "لأن المحلول يتكوّن من مذيب ومذاب يمتزجان بشكل متجانس لا يمكن تمييز مكوناتهما"
+            },
+            {
+                question: "النسبة المئوية للكتلة تُحسب من العلاقة:",
+                options: ["كتلة المذاب ÷ كتلة المحلول × 100", "كتلة المذيب ÷ كتلة المذاب × 100", "كتلة المحلول ÷ كتلة المذاب × 100"],
+                correctAnswer: 0,
+                explanation: "لأنها تعبر عن مقدار المذاب مقارنة بكتلة المحلول الكلية مضروبًا في 100 لإيجاد النسبة"
+            },
+            {
+                question: "وحدة قياس الكتلة في النظام الدولي هي:",
+                options: ["المتر", "الكيلوغرام", "اللتر"],
+                correctAnswer: 1,
+                explanation: "لأن الكيلوغرام هو الوحدة الأساسية المعتمدة عالميًا لقياس الكتلة"
+            },
+            {
+                question: "العنصر الذي يرمز له بالرمز (O) هو:",
+                options: ["الأوكسجين", "الهيدروجين", "النيتروجين"],
+                correctAnswer: 0,
+                explanation: "لأن الرمز (O) يُستخدم عالميًا للدلالة على عنصر الأوكسجين في الجدول الدوري"
+            },
+            {
+                question: "الماء يتكون من:",
+                options: ["عنصري الهيدروجين والأوكسجين", "عنصري الكربون والحديد", "عنصر واحد فقط"],
+                correctAnswer: 0,
+                explanation: "لأن الماء مركب كيميائي ناتج من اتحاد ذرتين من الهيدروجين مع ذرة واحدة من الأوكسجين"
+            },
+            {
+                question: "المخلوط الذي لا يمكن تمييز مكوناته بالعين يسمى:",
+                options: ["مخلوط غير متجانس", "مخلوط متجانس", "عنصر"],
+                correctAnswer: 1,
+                explanation: "لأن مكوناته تمتزج بانتظام مثل محلول السكر في الماء فلا يمكن تمييزها"
+            },
+            {
+                question: "جميع العناصر تتكون من:",
+                options: ["ذرات", "مركبات", "محاليل"],
+                correctAnswer: 0,
+                explanation: "لأن الذرة هي أصغر وحدة للمادة تحتفظ بخواص العنصر"
+            },
+            {
+                question: "العنصر الذي لا يمكن تقسيمه بطرق كيميائية هو:",
+                options: ["المركب", "العنصر", "المحلول"],
+                correctAnswer: 1,
+                explanation: "لأن العنصر مادة نقية لا يمكن تحليلها إلى مواد أبسط بالتفاعلات الكيميائية"
+            },
+            {
+                question: "يختلف المركب عن المخلوط في أن المركب:",
+                options: ["يمكن فصله بطرق فيزيائية", "له تركيب ثابت", "يحتفظ كل مكون بصفاته"],
+                correctAnswer: 1,
+                explanation: "لأن المركب يتكوّن من اتحاد عناصر بنسبة محددة وثابتة لا تتغير"
+            },
+            {
+                question: "عند إذابة السكر في الماء ينتج:",
+                options: ["محلول متجانس", "محلول غير متجانس", "مركب جديد"],
+                correctAnswer: 0,
+                explanation: "لأن مكونات المحلول تمتزج تمامًا ولا يمكن تمييزها بالعين"
+            },
+            {
+                question: "يطلق على المادة التي تذوب في مادة أخرى اسم:",
+                options: ["المذيب", "المذاب", "المحلول"],
+                correctAnswer: 1,
+                explanation: "لأن المذاب هو الجزء الذي يختفي داخل المذيب مكوّنًا المحلول"
+            },
+            {
+                question: "عند زيادة كمية المذاب في المحلول فإن تركيزه:",
+                options: ["يقل", "يزداد", "لا يتغير"],
+                correctAnswer: 1,
+                explanation: "لأن زيادة المذاب تعني زيادة النسبة بين المذاب والمذيب"
+            },
+            {
+                question: "السبب في ذوبان الملح في الماء هو:",
+                options: ["تشابه في القطبية بينهما", "اختلاف في الشحنة الكهربائية", "وجود روابط فلزية"],
+                correctAnswer: 0,
+                explanation: "لأن الماء والملح كلاهما مواد قطبية فتحدث تجاذبات كهربائية بينهما"
+            },
+            {
+                question: "يتشابه العنصر والمركب في أنهما:",
+                options: ["مواد نقية", "يمكن فصلهما بطرق فيزيائية", "يتغيران بسهولة"],
+                correctAnswer: 0,
+                explanation: "لأن كلًا منهما يتكوّن من مادة واحدة بتركيب محدد"
+            },
+            {
+                question: "يمكن وصف المحلول بأنه:",
+                options: ["خليط غير متجانس", "خليط متجانس", "مركب كيميائي"],
+                correctAnswer: 1,
+                explanation: "لأن مكوناته تمتزج بشكل موحد ولا يمكن تمييزها"
+            },
+            {
+                question: "ذوبان الشاي في الماء يُعد مثالًا على:",
+                options: ["تفاعل كيميائي", "محلول متجانس", "محلول غير متجانس"],
+                correctAnswer: 1,
+                explanation: "لأن عملية الذوبان لا تغير في التركيب الكيميائي للشاي"
+            },
+            {
+                question: "عند تبخر الماء من محلول الملح يبقى:",
+                options: ["الملح فقط", "الماء فقط", "مركب جديد"],
+                correctAnswer: 0,
+                explanation: "لأن التبخر يزيل المذيب (الماء) ويبقى المذاب (الملح)"
+            },
+            {
+                question: "المادة التي لا يمكن تجزئتها إلى مواد أبسط تُسمى:",
+                options: ["مركب", "عنصر", "محلول"],
+                correctAnswer: 1,
+                explanation: "لأن العنصر هو أبسط صورة للمادة ولا يمكن تحليله كيميائيًا"
+            },
+            {
+                question: "إذا كانت كتلة المذاب 20 جم وكتلة المحلول 200 جم، فإن النسبة المئوية للكتلة تساوي:",
+                options: ["10%", "20%", "5%"],
+                correctAnswer: 0,
+                explanation: "النسبة = (20 ÷ 200) × 100 = 10%"
+            },
+            {
+                question: "لتحديد ما إذا كانت المادة عنصرًا أم مركبًا يمكن استخدام:",
+                options: ["اختبار الذوبان", "التحليل الكيميائي", "التسخين فقط"],
+                correctAnswer: 1,
+                explanation: "لأن التحليل الكيميائي يوضح ما إذا كانت المادة تتجزأ إلى عناصر"
+            },
+            {
+                question: "عندما تتحد ذرتان من الهيدروجين مع ذرة من الأوكسجين يتكون:",
+                options: ["غاز الأوكسجين", "الماء", "بخار الهيدروجين"],
+                correctAnswer: 1,
+                explanation: "لأن اتحاد H₂ و O ينتج مركب الماء H₂O"
+            },
+            {
+                question: "إذا أذبت 5 جم من السكر في 95 جم من الماء فإن كتلة المحلول تساوي:",
+                options: ["100 جم", "90 جم", "105 جم"],
+                correctAnswer: 0,
+                explanation: "كتلة المحلول = المذاب + المذيب = 5 + 95 = 100 جم"
+            },
+            {
+                question: "يمكن فصل الرمل عن الماء بواسطة:",
+                options: ["الترشيح", "التقطير", "التبخر"],
+                correctAnswer: 0,
+                explanation: "لأن الرمل لا يذوب في الماء ويمكن إزالته باستخدام ورق ترشيح"
+            },
+            {
+                question: "لحساب النسبة المئوية للمركب نحتاج إلى:",
+                options: ["كتلة العنصر وكتلة المركب", "حجم العنصر فقط", "كتلة المذيب فقط"],
+                correctAnswer: 0,
+                explanation: "لأن النسبة تعتمد على مقارنة كتلة العنصر بكتلة المركب الكلية"
+            },
+            {
+                question: "عند تسخين مركب الماء ينتج:",
+                options: ["الهيدروجين والأوكسجين", "الكربون والنيتروجين", "بخار الماء"],
+                correctAnswer: 0,
+                explanation: "لأن التسخين يكسر الروابط بين عناصر المركب"
+            },
+            {
+                question: "لفصل الملح عن الماء يُستخدم:",
+                options: ["التبخر", "التقطير", "الترشيح"],
+                correctAnswer: 0,
+                explanation: "لأن التبخر يزيل الماء ويترك الملح المتبقي"
+            },
+            {
+                question: "يستخدم قانون النسبة المئوية للكتلة لحساب:",
+                options: ["نسبة العنصر في المركب", "حجم المادة", "درجة الغليان"],
+                correctAnswer: 0,
+                explanation: "لأنه يحدد مقدار العنصر داخل المركب من خلال الكتلة"
+            },
+            {
+                question: "عند إذابة كمية كبيرة من السكر في كمية قليلة من الماء نحصل على محلول:",
+                options: ["مركز", "مخفف", "مشبع"],
+                correctAnswer: 0,
+                explanation: "لأن تركيز المذاب مرتفع مقارنة بالمذيب"
+            },
+            {
+                question: "قارن بين العنصر والمركب من حيث عدد الذرات.",
+                options: ["العنصر نوع واحد، المركب نوعان أو أكثر", "كلاهما نوع واحد", "كلاهما نوعان مختلفان"],
+                correctAnswer: 0,
+                explanation: "لأن العنصر يتكوّن من ذرة واحدة بينما المركب من اتحاد عناصر متعددة"
+            },
+            {
+                question: "عند تحليل الماء كهربائيًا نحصل على:",
+                options: ["ذرات هيدروجين فقط", "غازي الهيدروجين والأوكسجين", "محلول جديد"],
+                correctAnswer: 1,
+                explanation: "لأن التحليل الكهربائي يفصل العناصر المكوّنة للماء"
+            },
+            {
+                question: "السبب في ثبات تركيب المركب هو:",
+                options: ["لأنه خليط متجانس", "لأن عناصره مرتبطة بنسب ثابتة", "لأن له لونًا ثابتًا"],
+                correctAnswer: 1,
+                explanation: "لأن المركب يتكوّن وفق قانون النسب الثابتة"
+            },
+            {
+                question: "عند مقارنة السكر والملح نجد أنهما:",
+                options: ["عنصران نقيان", "مركبان كيميائيان", "محاليل متجانسة"],
+                correctAnswer: 1,
+                explanation: "لأن كلاً منهما يتكوّن من أكثر من عنصر باتحاد كيميائي"
+            },
+            {
+                question: "يمكن التمييز بين المركب والمحلول من خلال:",
+                options: ["ثبات النسبة بين المكونات", "اللون فقط", "الشكل البلوري"],
+                correctAnswer: 0,
+                explanation: "لأن المركب له نسبة تركيب ثابتة بينما المحلول تختلف نسب مكوناته"
+            },
+            {
+                question: "تحليل ثاني أكسيد الكربون ينتج:",
+                options: ["كربون وأوكسجين", "هيدروجين وأوكسجين", "كربون وهيدروجين"],
+                correctAnswer: 0,
+                explanation: "لأن CO₂ يحتوي على عنصري الكربون والأوكسجين فقط"
+            },
+            {
+                question: "عند مزج الرمل والحديد يمكن فصلهما باستخدام:",
+                options: ["مغناطيس", "التقطير", "الترشيح"],
+                correctAnswer: 0,
+                explanation: "لأن الحديد ينجذب للمغناطيس بينما الرمل لا ينجذب"
+            },
+            {
+                question: "السبب في أن العناصر والمركبات مواد نقية هو:",
+                options: ["لثبات تركيبها", "لأنها خليط من مواد مختلفة", "لأنها تتغير بالحرارة"],
+                correctAnswer: 0,
+                explanation: "لأنها تمتلك تركيبًا محددًا لا يتغير من عينة لأخرى"
+            },
+            {
+                question: "اختر طريقة مناسبة لفصل الزيت عن الماء:",
+                options: ["الترشيح", "قمع الفصل", "التقطير"],
+                correctAnswer: 1,
+                explanation: "لأن الزيت والماء لا يمتزجان ويختلفان في الكثافة"
+            },
+            {
+                question: "يستنتج من قانون النسب الثابتة أن:",
+                options: ["كل مركب له تركيب متغير", "النسبة بين العناصر في المركب ثابتة دائمًا", "العناصر تتغير في كل مرة"],
+                correctAnswer: 1,
+                explanation: "لأن المركبات تتكوّن من نفس العناصر بنفس النسب دائمًا"
+            },
+            {
+                question: "لتقليل تركيز محلول ملحي يمكن:",
+                options: ["إضافة مزيد من المذيب", "تبخير الماء", "زيادة المذاب"],
+                correctAnswer: 0,
+                explanation: "لأن زيادة المذيب تخفف تركيز المحلول"
+            },
+            {
+                question: "أهمية دراسة العناصر والمركبات هي:",
+                options: ["لفهم التفاعلات الكيميائية", "لتغيير الألوان فقط", "لتزيين المعامل"],
+                correctAnswer: 0,
+                explanation: "لأنها أساس فهم تركيب المواد وسلوكها في الطبيعة"
+            },
+            {
+                question: "قيّم العبارة: \"الماء عنصر كيميائي\"",
+                options: ["صحيحة", "خاطئة", "صحيحة جزئيًا"],
+                correctAnswer: 1,
+                explanation: "لأن الماء مركب يتكوّن من عنصرين مختلفين هما الهيدروجين والأوكسجين"
+            },
+            {
+                question: "تدل تجربة ذوبان السكر في الماء على أن:",
+                options: ["السكر تغير كيميائيًا", "السكر ذاب فيزيائيًا دون تغيير", "تكوّن مركب جديد"],
+                correctAnswer: 1,
+                explanation: "لأن الذوبان عملية فيزيائية لا تنتج مادة جديدة"
+            },
+            {
+                question: "لتكوين مركب جديد يجب أن:",
+                options: ["تتفاعل عناصر بنسب ثابتة", "تخلط عناصر دون تفاعل", "تسخن فقط"],
+                correctAnswer: 0,
+                explanation: "لأن التفاعل الكيميائي ينتج مركبًا بنسبة ثابتة من العناصر"
+            },
+            {
+                question: "عند زيادة المذاب حتى لا يذوب أكثر يصبح المحلول:",
+                options: ["مركز", "مشبع", "مخفف"],
+                correctAnswer: 1,
+                explanation: "لأن المحلول المشبع لا يمكنه إذابة المزيد من المذاب"
+            },
+            {
+                question: "أهمية قانون النسبة المئوية أنه:",
+                options: ["يحدد كتلة العنصر في المركب", "يحدد اللون", "يقيس درجة الحرارة"],
+                correctAnswer: 0,
+                explanation: "لأنه يستخدم لمعرفة النسب الدقيقة للعناصر في المركبات"
+            },
+            {
+                question: "عند تبريد المحلول المشبع ينتج:",
+                options: ["زيادة الذوبان", "ترسب المذاب الزائد", "اختفاء المذاب"],
+                correctAnswer: 1,
+                explanation: "لأن انخفاض درجة الحرارة يقلل من الذوبان فيترسب المذاب"
+            },
+            {
+                question: "السبب في اعتبار الماء مذيبًا عامًّا هو:",
+                options: ["لأنه عديم اللون", "لأنه يذيب مواد كثيرة", "لأنه مركب نقي"],
+                correctAnswer: 1,
+                explanation: "لأن قطبية جزيئاته تجعله قادرًا على إذابة معظم المواد"
+            },
+            {
+                question: "تُعد النسبة المئوية للكتلة مفيدة لأنها:",
+                options: ["تساعد على تحديد تركيب المركبات بدقة", "تستخدم فقط في الفيزياء", "لا علاقة لها بالكيمياء"],
+                correctAnswer: 0,
+                explanation: "لأنها أداة دقيقة لمعرفة كمية كل عنصر في المركبات المختلفة"
+            }
+        ];
+
+        // بيانات الألغاز الكيميائية
+        const puzzles = [
+            {
+                question: "أنا عنصر غازي، خفيف جدًا، أستخدم في البالونات والطيران. ما اسمي؟",
+                options: ["الأكسجين", "الهيدروجين", "الهيليوم"],
+                correctAnswer: 1,
+                explanation: "الهيدروجين هو أخف العناصر ويستخدم في المناطيد والبالونات"
+            },
+            {
+                question: "مركب مائي معروف، صيغته H₂O --- ما اسمه الشائع؟",
+                options: ["الماء", "الكحول", "حمض الكبريتيك"],
+                correctAnswer: 0,
+                explanation: "الماء هو المركب الأكثر شيوعًا وصيغته الكيميائية H₂O"
+            },
+            {
+                question: "أنا معدن لامع يُستخدم في صنع المجوهرات والساعات، رمزي Au. من أنا؟",
+                options: ["الفضة", "الذهب", "النحاس"],
+                correctAnswer: 1,
+                explanation: "الذهب معدن ثمين رمزه الكيميائي Au ويستخدم في المجوهرات"
+            },
+            {
+                question: "عندي شحنة سالبة وأدور حول نواة الذرة --- من أنا؟",
+                options: ["البروتون", "الإلكترون", "النيوترون"],
+                correctAnswer: 1,
+                explanation: "الإلكترونات تحمل شحنة سالبة وتدور حول النواة في مدارات"
+            },
+            {
+                question: "غاز عديم اللون والرائحة يُستخدم في المصابيح النيونية. ما اسمي؟",
+                options: ["النيون", "الهيدروجين", "الأكسجين"],
+                correctAnswer: 0,
+                explanation: "النيون غاز نبيل يستخدم في الإضاءة والإعلانات"
+            },
+            {
+                question: "مركب يتكون من صوديوم وكلور --- يُستخدم في الطعام.",
+                options: ["ملح الطعام", "السكر", "الخل"],
+                correctAnswer: 0,
+                explanation: "ملح الطعام هو كلوريد الصوديوم (NaCl)"
+            },
+            {
+                question: "تفاعل بين حمض وقاعدة يعطي ماء وملح --- ما اسم هذا النوع من التفاعل؟",
+                options: ["تفاعل أكسدة واختزال", "تفاعل التعادل", "تفاعل احتراق"],
+                correctAnswer: 1,
+                explanation: "تفاعل التعادل يحدث بين الحمض والقاعدة وينتج ملح وماء"
+            },
+            {
+                question: "في الجدول الدوري أنا في المجموعة 1، أُستخدم في البطاريات. من أنا؟",
+                options: ["الكالسيوم", "الصوديوم", "الزنك"],
+                correctAnswer: 1,
+                explanation: "الصوديوم من الفلزات القلوية في المجموعة 1 ويستخدم في البطاريات"
+            },
+            {
+                question: "عملية تحول المادة من سائل إلى غاز عند درجة حرارة أقل من الغليان.",
+                options: ["الانصهار", "التبخر", "التكاثف"],
+                correctAnswer: 1,
+                explanation: "التبخر هو تحول المادة من الحالة السائلة إلى الغازية"
+            },
+            {
+                question: "نوع من الروابط الكيميائية تتشارك فيه الذرات إلكترونات.",
+                options: ["تساهمية", "أيونية", "فلزية"],
+                correctAnswer: 0,
+                explanation: "الرابطة التساهمية تتضمن مشاركة الإلكترونات بين الذرات"
+            }
+        ];
+
+        // متغيرات التطبيق
+        let currentQuestion = 0;
+        let currentPuzzle = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        let puzzleAnswers = new Array(puzzles.length).fill(null);
+        let timer;
+        let timeLeft = 40 * 60;
+        let studentName = "";
+        let studentSection = "";
+
+        // عناصر DOM
+        const startScreen = document.getElementById('start-screen');
+        const puzzlesScreen = document.getElementById('puzzles-screen');
+        const quizScreen = document.getElementById('quiz-screen');
+        const resultsScreen = document.getElementById('results-screen');
+        const studentForm = document.getElementById('student-form');
+        const studentInfo = document.getElementById('student-info');
+        const timerElement = document.getElementById('timer');
+        const questionCounter = document.getElementById('question-counter');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const finalScore = document.getElementById('final-score');
+        const scoreDetails = document.getElementById('score-details');
+        const feedbackMessage = document.getElementById('feedback-message');
+        const celebration = document.getElementById('celebration');
+        const restartBtn = document.getElementById('restart-btn');
+        const questionsReview = document.getElementById('questions-review');
+
+        // عناصر الألغاز
+        const puzzlesBtn = document.getElementById('puzzles-btn');
+        const puzzlesBackBtn = document.getElementById('puzzles-back-btn');
+        const puzzlesCounter = document.getElementById('puzzles-counter');
+        const puzzleText = document.getElementById('puzzle-text');
+        const puzzleOptions = document.getElementById('puzzle-options');
+        const puzzleFeedback = document.getElementById('puzzle-feedback');
+        const puzzlePrevBtn = document.getElementById('puzzle-prev-btn');
+        const puzzleNextBtn = document.getElementById('puzzle-next-btn');
+
+        // بدء المؤقت
+        function startTimer() {
+            timer = setInterval(() => {
+                timeLeft--;
+                updateTimer();
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    endQuiz();
+                }
+            }, 1000);
+        }
+        
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft < 300) {
+                timerElement.style.color = '#ff5252';
+            }
+        }
+
+        // عرض السؤال الحالي
+        function displayQuestion() {
+            const question = questions[currentQuestion];
+            questionText.textContent = question.question;
+            questionCounter.textContent = `السؤال ${currentQuestion + 1} من ${questions.length}`;
+            
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.textContent = currentQuestion === questions.length - 1 ? 'إنهاء' : 'التالي';
+            
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.textContent = option;
+                
+                if (userAnswers[currentQuestion] === index) {
+                    optionElement.classList.add('selected');
+                }
+                
+                optionElement.addEventListener('click', () => selectOption(index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        function selectOption(optionIndex) {
+            userAnswers[currentQuestion] = optionIndex;
+            displayQuestion();
+        }
+
+        function nextQuestion() {
+            if (userAnswers[currentQuestion] === null) {
+                alert('يجب الإجابة على السؤال الحالي قبل الانتقال إلى السؤال التالي.');
+                return;
+            }
+            
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+            } else {
+                endQuiz();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+            }
+        }
+
+        function endQuiz() {
+            clearInterval(timer);
+            quizScreen.style.display = 'none';
+            resultsScreen.style.display = 'block';
+            
+            const correctAnswers = userAnswers.filter((answer, index) => 
+                answer === questions[index].correctAnswer
+            ).length;
+            
+            const score = Math.round((correctAnswers / questions.length) * 100);
+            finalScore.textContent = `${score}%`;
+            scoreDetails.textContent = `${correctAnswers} من ${questions.length}`;
+            
+            let message = "";
+            if (score >= 90) {
+                message = "ممتاز! لديك فهم رائع لمفاهيم الكيمياء. استمر في هذا التميز!";
+                celebration.textContent = "🎉🏆";
+            } else if (score >= 70) {
+                message = "جيد جدًا! لديك فهم جيد للموضوع، ولكن يمكنك تحسين أدائك بمراجعة بعض النقاط.";
+                celebration.textContent = "👏👍";
+            } else if (score >= 50) {
+                message = "مقبول. تحتاج إلى مراجعة المادة الدراسية لتحسين فهمك للمفاهيم الأساسية.";
+                celebration.textContent = "💪";
+            } else {
+                message = "يحتاج إلى تحسين. ننصحك بمراجعة شاملة للمادة الدراسية والتدرب أكثر على حل الأسئلة.";
+                celebration.textContent = "📚";
+            }
+            
+            feedbackMessage.textContent = message;
+            displayFinalFeedback();
+        }
+
+        function displayFinalFeedback() {
+            questionsReview.innerHTML = '';
+            
+            questions.forEach((question, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === question.correctAnswer;
+                
+                const reviewItem = document.createElement('div');
+                reviewItem.className = `question-review ${isCorrect ? 'correct' : 'incorrect'}`;
+                
+                reviewItem.innerHTML = `
+                    <div class="review-question">${index + 1}. ${question.question}</div>
+                    <div class="review-answer">
+                        إجابتك: <span style="color: ${isCorrect ? 'var(--success-green)' : 'var(--error-red)'}">${question.options[userAnswer] || 'لم تجب'}</span>
+                    </div>
+                    <div class="review-answer review-correct">
+                        الإجابة الصحيحة: ${question.options[question.correctAnswer]}
+                    </div>
+                    <div class="review-explanation">
+                        <strong>السبب:</strong> ${question.explanation}
+                    </div>
+                `;
+                
+                questionsReview.appendChild(reviewItem);
+            });
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            userAnswers = new Array(questions.length).fill(null);
+            timeLeft = 40 * 60;
+            
+            startScreen.style.display = 'block';
+            quizScreen.style.display = 'none';
+            resultsScreen.style.display = 'none';
+            
+            updateTimer();
+        }
+
+        // دوال الألغاز
+        function displayPuzzle() {
+            const puzzle = puzzles[currentPuzzle];
+            puzzleText.textContent = puzzle.question;
+            puzzlesCounter.textContent = `اللغز ${currentPuzzle + 1} من ${puzzles.length}`;
+            
+            puzzlePrevBtn.disabled = currentPuzzle === 0;
+            puzzleNextBtn.textContent = currentPuzzle === puzzles.length - 1 ? 'إنهاء' : 'التالي';
+            
+            puzzleOptions.innerHTML = '';
+            puzzleFeedback.className = 'puzzle-feedback';
+            puzzleFeedback.textContent = '';
+            
+            puzzle.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'puzzle-option';
+                optionElement.textContent = option;
+                
+                if (puzzleAnswers[currentPuzzle] === index) {
+                    optionElement.classList.add('selected');
+                }
+                
+                optionElement.addEventListener('click', () => selectPuzzleOption(index));
+                puzzleOptions.appendChild(optionElement);
+            });
+        }
+
+        function selectPuzzleOption(optionIndex) {
+            puzzleAnswers[currentPuzzle] = optionIndex;
+            
+            const puzzle = puzzles[currentPuzzle];
+            const options = document.querySelectorAll('.puzzle-option');
+            
+            // إظهار الإجابة الصحيحة والخاطئة
+            options.forEach((option, index) => {
+                if (index === puzzle.correctAnswer) {
+                    option.classList.add('correct');
+                } else if (index === optionIndex && index !== puzzle.correctAnswer) {
+                    option.classList.add('incorrect');
+                }
+                
+                if (index === optionIndex) {
+                    option.classList.add('selected');
+                }
+            });
+            
+            // عرض التغذية الراجعة
+            if (optionIndex === puzzle.correctAnswer) {
+                puzzleFeedback.className = 'puzzle-feedback correct';
+                puzzleFeedback.textContent = `إجابة صحيحة! ${puzzle.explanation}`;
+            } else {
+                puzzleFeedback.className = 'puzzle-feedback incorrect';
+                puzzleFeedback.textContent = `إجابة خاطئة. الإجابة الصحيحة: ${puzzle.options[puzzle.correctAnswer]}. ${puzzle.explanation}`;
+            }
+        }
+
+        function nextPuzzle() {
+            if (puzzleAnswers[currentPuzzle] === null) {
+                alert('يجب الإجابة على اللغز الحالي قبل الانتقال إلى اللغز التالي.');
+                return;
+            }
+            
+            if (currentPuzzle < puzzles.length - 1) {
+                currentPuzzle++;
+                displayPuzzle();
+            } else {
+                // انتهاء الألغاز
+                alert('تهانينا! لقد أكملت جميع الألغاز الكيميائية بنجاح!');
+                puzzlesScreen.style.display = 'none';
+                startScreen.style.display = 'block';
+                currentPuzzle = 0;
+                puzzleAnswers = new Array(puzzles.length).fill(null);
+            }
+        }
+
+        function prevPuzzle() {
+            if (currentPuzzle > 0) {
+                currentPuzzle--;
+                displayPuzzle();
+            }
+        }
+
+        // تهيئة التطبيق
+        function init() {
+            // أحداث الاختبار الرئيسي
+            studentForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                studentName = document.getElementById('student-name').value;
+                studentSection = document.getElementById('student-section').value;
+                
+                if (!studentName || !studentSection) {
+                    alert('يرجى ملء جميع الحقول المطلوبة.');
+                    return;
+                }
+                
+                studentInfo.textContent = `${studentName} - الشعبة ${studentSection}`;
+                
+                startScreen.style.display = 'none';
+                quizScreen.style.display = 'block';
+                
+                displayQuestion();
+                startTimer();
+            });
+
+            // أحداث الألغاز
+            puzzlesBtn.addEventListener('click', () => {
+                startScreen.style.display = 'none';
+                puzzlesScreen.style.display = 'block';
+                displayPuzzle();
+            });
+
+            puzzlesBackBtn.addEventListener('click', () => {
+                puzzlesScreen.style.display = 'none';
+                startScreen.style.display = 'block';
+                currentPuzzle = 0;
+                puzzleAnswers = new Array(puzzles.length).fill(null);
+            });
+
+            // أحداث التنقل
+            prevBtn.addEventListener('click', prevQuestion);
+            nextBtn.addEventListener('click', nextQuestion);
+            restartBtn.addEventListener('click', restartQuiz);
+            
+            puzzlePrevBtn.addEventListener('click', prevPuzzle);
+            puzzleNextBtn.addEventListener('click', nextPuzzle);
+        }
+
+        // بدء التطبيق
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>
